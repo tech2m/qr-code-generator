@@ -1,1 +1,91 @@
-<h1>Hello World!</h1>
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>QR-Code Generator</title>
+    <link rel="stylesheet" href="style.css"/>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <h1>QR-Code Generator</h1>
+          <p class="lead">
+            Gib Text oder eine URL ein — erzeuge und lade deinen QR-Code als PNG herunter.
+          </p>
+        </div>
+      </header>
+
+      <div class="grid">
+        <!-- QR-Formular -->
+        <div class="card">
+          <div>
+            <label for="text">Text / URL</label>
+            <textarea id="text" rows="4" placeholder="https://example.com"></textarea>
+          </div>
+
+          <div class="options">
+            <div>
+              <label for="size">Größe (px)</label>
+              <input id="size" type="number" min="64" max="2048" value="300" />
+            </div>
+            <div>
+              <label for="ec">Fehlerkorrektur</label>
+              <select id="ec">
+                <option value="L">L (niedrig)</option>
+                <option value="M" selected>M (mittel)</option>
+                <option value="Q">Q (hoch)</option>
+                <option value="H">H (sehr hoch)</option>
+              </select>
+            </div>
+            <div>
+              <label for="margin">Rand (Module)</label>
+              <input id="margin" type="number" min="0" max="40" value="4" />
+            </div>
+          </div>
+
+          <div class="colors">
+            <div>
+              <label for="fg">Vordergrundfarbe</label>
+              <input id="fg" type="color" value="#000000" />
+            </div>
+            <div>
+              <label for="bg">Hintergrundfarbe</label>
+              <input id="bg" type="color" value="#ffffff" />
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="generate">Generieren</button>
+            <button class="secondary" onClick="window.location.reload();">Zurücksetzen</button>
+          </div>
+
+          <div class="small">
+            <br>
+            QR-Codes mit hoher Fehlerkorrektur können größere Datenmengen besser verzeihen, benötigen aber mehr Platz.
+          </div>
+        </div>
+
+        <!-- QR-Vorschau -->
+        <div class="card preview disabled" id="preview-div">
+          <div style="text-align: center">
+            <strong>Vorschau</strong>
+            <div class="small">Scanne mit Handy-Kamera oder QR-Scanner</div>
+          </div>
+          <canvas id="qr-canvas" width="300" height="300"></canvas>
+
+          <div class="preview-controls">
+            <button id="download" class="secondary">Als PNG herunterladen</button>
+            <button id="copy" class="secondary">Als Data-URL kopieren</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
